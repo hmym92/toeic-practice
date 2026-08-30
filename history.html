@@ -1,1 +1,48 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>中学歴史問題集</title><style>body{font-family:sans-serif;background:#f4f6f8;margin:0;color:#222}header{background:#173f5f;color:#fff;padding:20px}main{max-width:700px;margin:auto;padding:16px}.card{background:#fff;padding:20px;border-radius:16px;margin-bottom:16px}button{display:block;width:100%;padding:15px;margin:10px 0;border:0;border-radius:10px;background:#eef2f5;text-align:left;font-size:16px}.ok{background:#dff5ef!important}.ng{background:#ffe5df!important}#next{background:#173f5f;color:#fff;text-align:center}.hide{display:none}.q{font-size:19px;font-weight:bold;line-height:1.6}</style></head><body><header><b>📚 中学歴史・教科書準拠問題集</b><br><small>東京書籍「新編 新しい社会 歴史」第1章＋第2章第1節</small></header><main><div id="home" class="card"><h2>学習スタート</h2><p>4択問題を20問出題します。</p><button onclick="start()">▶ 問題を始める</button></div><div id="quiz" class="card hide"><div id="num"></div><div id="q" class="q"></div><div id="choices"></div><div id="msg"></div><button id="next" class="hide" onclick="next()">次の問題 →</button></div><div id="result" class="card hide"><h2>結果</h2><div id="score"></div><button onclick="location.reload()">もう一度</button></div></main><script>const b=[['歴史上の出来事を年代順に整理したものは？',['年表','系図','地図','統計表'],0,'年表です。'],['紀元前を表すB.C.は何の略？',['Before Christ','British Culture','Basic Calendar','Before Century'],0,'Before Christの略です。'],['人類が誕生したと考えられている地域は？',['アフリカ','ヨーロッパ','南アメリカ','オーストラリア'],0,'アフリカで誕生したと考えられています。'],['旧石器時代の人々の主な生活は？',['狩猟・採集','稲作','工場生産','貿易'],0,'狩猟・採集によって食料を得ていました。'],['石を打ち欠いて作った石器は？',['打製石器','磨製石器','青銅器','鉄器'],0,'打製石器です。'],['農耕・牧畜の開始によって増えた生活は？',['定住生活','遊牧だけ','海上生活','移住だけ'],0,'食料を生産できるようになり定住する人々が増えました。'],['ナイル川流域で発達した文明は？',['エジプト文明','インダス文明','中国文明','メソポタミア文明'],0,'ナイル川流域ではエジプト文明が発達しました。'],['メソポタミアを流れる二つの大河は？',['チグリス川とユーフラテス川','ナイル川とインダス川','黄河と長江','アマゾン川とナイル川'],0,'チグリス川とユーフラテス川です。'],['メソポタミア文明で使われた文字は？',['くさび形文字','甲骨文字','万葉仮名','アルファベット'],0,'くさび形文字です。'],['インダス川流域で発達した文明は？',['インダス文明','エジプト文明','中国文明','メソポタミア文明'],0,'インダス文明です。'],['中国文明が発達した代表的な大河は？',['黄河','ナイル川','インダス川','ユーフラテス川'],0,'黄河流域を中心に文明が発達しました。'],['仏教を開いた人物は？',['シャカ（釈迦）','イエス','ムハンマド','孔子'],0,'シャカ（釈迦）です。'],['キリスト教を開いた人物は？',['イエス','シャカ','ムハンマド','孔子'],0,'イエスを中心にキリスト教が成立しました。'],['イスラム教を開いた人物は？',['ムハンマド','イエス','シャカ','孔子'],0,'ムハンマドです。'],['古代文明が発達した地域に多く見られる特徴は？',['大河の流域で農業が発達した','必ず高山に都市を作った','農業を行わなかった','砂漠だけに発達した'],0,'大河の水を利用して農業が発達しました。'],['農業で余った食料が生まれると何が進みましたか？',['分業','狩猟だけ','移住','石器の使用'],0,'分業が進み、都市や国家の発達につながりました。'],['古代エジプトの象形文字は？',['ヒエログリフ','くさび形文字','甲骨文字','万葉仮名'],0,'ヒエログリフです。'],['地域の歴史を調べるとき、古地図は何の手がかりになる？',['地域の変化','未来の天気','外国の人口','為替'],0,'昔と現在を比較して地域の変化を考えられます。'],['歴史を調べるとき複数の資料を比べる理由は？',['多面的に考えられるから','古い資料が必ず正しいから','写真だけ使うから','資料が多いほど必ず正しいから'],0,'資料の違いや共通点から多面的に考えられます。'],['出来事を古い順に並べたものは？ ア農耕開始 イ人類誕生 ウ古代文明',['イ→ア→ウ','ア→イ→ウ','ウ→ア→イ','イ→ウ→ア'],0,'人類の誕生→農耕・牧畜→古代文明の発達の順です。']];let a=[],i=0,s=0;function start(){a=[...b].sort(()=>Math.random()-.5);i=0;s=0;home.classList.add('hide');quiz.classList.remove('hide');show()}function show(){let x=a[i];num.textContent=(i+1)+' / '+a.length;q.textContent='Q'+(i+1)+'　'+x[0];choices.innerHTML='';x[1].forEach((v,n)=>{let z=document.createElement('button');z.textContent=(n+1)+'　'+v;z.onclick=()=>ans(n,z);choices.appendChild(z)});msg.textContent='';next.classList.add('hide')}function ans(n,z){let x=a[i],bs=[...choices.children];bs.forEach(v=>v.disabled=true);bs[x[2]].classList.add('ok');if(n===x[2]){s++;msg.innerHTML='<p>⭕ 正解！ '+x[3]+'</p>';z.classList.add('ok')}else{z.classList.add('ng');msg.innerHTML='<p>❌ 正解は「'+x[1][x[2]]+'」<br>'+x[3]+'</p>'}next.classList.remove('hide')}function next(){i++;if(i<a.length)show();else{quiz.classList.add('hide');result.classList.remove('hide');score.innerHTML='<h3>'+s+' / '+a.length+'問（'+Math.round(s/a.length*100)+'%）</h3>'}}</script></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>中学歴史問題集</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;background:#f5f6f8;margin:0;color:#222}header{background:#173f5f;color:white;padding:20px}main{max-width:700px;margin:auto;padding:16px}.card{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px #0001}button{width:100%;padding:15px;margin:8px 0;border:0;border-radius:10px;background:#eef2f5;font-size:16px;text-align:left}.next{background:#173f5f;color:white;text-align:center}.correct{background:#dff5ef}.wrong{background:#ffe5df}.hide{display:none}.q{font-size:19px;font-weight:bold;line-height:1.6}.small{font-size:13px;color:#667}
+</style>
+</head>
+<body>
+<header><b>📚 中学歴史問題集</b><br><small>東京書籍「新編 新しい社会 歴史」第1章＋第2章第1節</small></header>
+<main>
+<section id="home" class="card"><h2>問題集</h2><p>まずは20問。ランダムに出題します。</p><button onclick="start()">▶ 問題を始める</button><p class="small">ページ接続確認版</p></section>
+<section id="quiz" class="card hide"><div id="count"></div><div id="question" class="q"></div><div id="choices"></div><div id="message"></div><button id="next" class="next hide" onclick="nextQuestion()">次の問題 →</button></section>
+<section id="result" class="card hide"><h2>結果</h2><div id="score"></div><button onclick="location.reload()">もう一度</button></section>
+</main>
+<script>
+const questions=[
+['人類が誕生したと考えられている地域は？',['アフリカ','ヨーロッパ','南アメリカ','オーストラリア'],0],
+['旧石器時代の人々の主な生活は？',['狩猟・採集','稲作','工場生産','貿易'],0],
+['石を打ち欠いて作った石器は？',['打製石器','磨製石器','青銅器','鉄器'],0],
+['農耕・牧畜の開始によって増えた生活は？',['定住生活','移動生活だけ','海上生活','洞窟生活だけ'],0],
+['ナイル川流域で発達した文明は？',['エジプト文明','インダス文明','中国文明','メソポタミア文明'],0],
+['メソポタミアを流れる二つの大河は？',['チグリス川とユーフラテス川','ナイル川とインダス川','黄河と長江','アマゾン川とナイル川'],0],
+['メソポタミア文明で使われた文字は？',['くさび形文字','甲骨文字','ヒエログリフ','万葉仮名'],0],
+['インダス川流域で発達した文明は？',['インダス文明','エジプト文明','中国文明','メソポタミア文明'],0],
+['中国文明が発達した代表的な大河は？',['黄河','ナイル川','インダス川','ユーフラテス川'],0],
+['古代エジプトの象形文字は？',['ヒエログリフ','くさび形文字','甲骨文字','ローマ字'],0],
+['仏教を開いた人物は？',['シャカ（釈迦）','イエス','ムハンマド','孔子'],0],
+['キリスト教を開いた人物は？',['イエス','シャカ','ムハンマド','孔子'],0],
+['イスラム教を開いた人物は？',['ムハンマド','イエス','シャカ','孔子'],0],
+['古代文明が発達した地域に多く見られる特徴は？',['大河の流域で農業が発達した','必ず高山に都市を作った','農業を行わなかった','砂漠だけに発達した'],0],
+['農業で余った食料が生まれると何が進みましたか？',['分業','狩猟だけ','移住','石器の使用'],0],
+['歴史上の出来事を年代順に整理したものは？',['年表','系図','地図','統計表'],0],
+['歴史を調べるとき複数の資料を比べる理由は？',['多面的に考えられるから','古い資料が必ず正しいから','写真だけ使うから','資料が多いほど必ず正しいから'],0],
+['古地図は地域の何を知る手がかりになる？',['地域の変化','未来の天気','外国の人口','為替'],0],
+['農耕・牧畜が始まったことで可能になったことは？',['食料を生産・蓄えること','人々が全員移動すること','道具を使わなくなること','文字がなくなること'],0],
+['人類の誕生から古代文明までの順序として正しいものは？',['人類誕生→農耕・牧畜→古代文明','古代文明→人類誕生→農耕','農耕→人類誕生→古代文明','宗教→農耕→人類誕生'],0]
+];
+let list=[],idx=0,score=0;
+function start(){list=[...questions].sort(()=>Math.random()-0.5);idx=0;score=0;document.getElementById('home').classList.add('hide');document.getElementById('result').classList.add('hide');document.getElementById('quiz').classList.remove('hide');show();}
+function show(){const x=list[idx];document.getElementById('count').textContent=(idx+1)+' / '+list.length;document.getElementById('question').textContent='Q'+(idx+1)+'　'+x[0];const c=document.getElementById('choices');c.innerHTML='';document.getElementById('message').innerHTML='';document.getElementById('next').classList.add('hide');x[1].forEach((v,n)=>{const b=document.createElement('button');b.textContent=(n+1)+'　'+v;b.onclick=()=>answer(n,b);c.appendChild(b);});}
+function answer(n,b){const x=list[idx];const bs=[...document.getElementById('choices').children];bs.forEach(v=>v.disabled=true);bs[x[2]].classList.add('correct');if(n===x[2]){score++;b.classList.add('correct');document.getElementById('message').innerHTML='<p>⭕ 正解！</p>';}else{b.classList.add('wrong');document.getElementById('message').innerHTML='<p>❌ 正解は「'+x[1][x[2]]+'」</p>';}document.getElementById('next').classList.remove('hide');}
+function nextQuestion(){idx++;if(idx<list.length)show();else{document.getElementById('quiz').classList.add('hide');document.getElementById('result').classList.remove('hide');document.getElementById('score').innerHTML='<h3>'+score+' / '+list.length+'問（'+Math.round(score/list.length*100)+'%）</h3>';}}
+</script>
+</body>
+</html>
