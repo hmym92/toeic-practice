@@ -1,0 +1,56 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>中学歴史問題集</title><style>body{margin:0;background:#f3f6f8;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}header{background:#173f5f;color:#fff;padding:18px}main{max-width:700px;margin:auto;padding:14px}.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 2px 8px #0001}button{width:100%;border:0;border-radius:11px;padding:14px;margin:6px 0;font-size:16px;background:#edf1f4}.primary{background:#173f5f;color:#fff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid button{margin:0}.selected{outline:3px solid #3caea3}.hide{display:none}.q{font-size:19px;font-weight:bold;line-height:1.6}.small{font-size:12px;color:#667}.bar{height:7px;background:#ddd;border-radius:8px;margin:12px 0;overflow:hidden}.bar span{display:block;height:100%;background:#3caea3;width:0}.good{background:#dff5ef!important}.bad{background:#ffe4df!important}.feedback{padding:12px;border-radius:10px;line-height:1.6}.score{text-align:center;font-size:34px;font-weight:bold}</style></head><body><header><b>📚 中学歴史問題集</b><div class="small" style="color:#fff">東京書籍「新編 新しい社会 歴史」第1章・第2章第1節</div></header><main><div id="screenHome" class="card"><h2>範囲</h2><div class="grid"><button id="rangeAll" class="selected">📖 全範囲</button><button id="rangeCh1">第1章</button><button id="rangeCh2">第2章 第1節</button></div><h2>レベル</h2><div class="grid"><button id="levelAll" class="selected">全部</button><button id="levelBasic">🟢 基礎</button><button id="levelStd">🟡 標準</button><button id="levelAdv">🔴 応用</button></div><button id="startBtn" class="primary">▶ 20問スタート</button><button id="reviewBtn">🔄 間違い問題を復習</button></div><div id="screenQuiz" class="card hide"><div id="info" class="small"></div><div class="bar"><span id="progress"></span></div><div id="question" class="q"></div><div id="answers"></div><div id="feedback"></div><button id="nextBtn" class="primary hide">次の問題 →</button></div><div id="screenResult" class="card hide"><h2>🎉 結果</h2><div id="score" class="score"></div><p id="message"></p><button id="againBtn" class="primary">もう一度</button><button id="resultHomeBtn">ホームへ</button></div></main><script>
+(function(){
+'use strict';
+var questions=[
+{r:'ch1',l:'basic',q:'歴史上の出来事を年代順に並べたものは？',a:['年表','系図','地図','統計'],c:0,e:'年表は時間の流れを整理する資料です。'},
+{r:'ch1',l:'basic',q:'西暦1年から100年までを何世紀という？',a:['1世紀','2世紀','3世紀','10世紀'],c:0,e:'1～100年は1世紀です。'},
+{r:'ch1',l:'basic',q:'西暦1年より前の年代を何という？',a:['紀元前','中世','近代','現代'],c:0,e:'西暦1年より前を紀元前と表します。'},
+{r:'ch1',l:'basic',q:'文字で書かれた歴史資料を何という？',a:['文献','遺物','遺跡','化石'],c:0,e:'文字で残された資料を文献といいます。'},
+{r:'ch1',l:'basic',q:'過去の人々が使った道具などを何という？',a:['遺物','文献','年表','地図'],c:0,e:'道具や生活用品などは遺物です。'},
+{r:'ch1',l:'basic',q:'昔の建物や集落などの跡を何という？',a:['遺跡','文献','系図','年号'],c:0,e:'過去の人々の活動の跡を遺跡といいます。'},
+{r:'ch1',l:'std',q:'歴史資料を読むとき考えることとして適切なのは？',a:['作成者・目的・背景','大きさだけ','紙の色だけ','値段だけ'],c:0,e:'資料の作成者や目的、背景を考えることが大切です。'},
+{r:'ch1',l:'std',q:'複数の資料を比較するよさは？',a:['過去を多面的に考えられる','必ず答えが一つになる','古い資料が不要になる','年代が消える'],c:0,e:'共通点や相違点から多面的に考えられます。'},
+{r:'ch1',l:'std',q:'古地図と現在の地図を比べると分かりやすいものは？',a:['土地利用や町並みの変化','未来の人口','人物の性格','世界の気温'],c:0,e:'地域の昔と現在の変化を比較できます。'},
+{r:'ch1',l:'adv',q:'一つの資料だけで歴史を判断するのが危険なのはなぜ？',a:['資料には立場や目的があるから','古い資料は全部間違いだから','写真は全部嘘だから','年表が使えないから'],c:0,e:'資料には作成者の立場や目的があります。'},
+{r:'ch2',l:'basic',q:'人類が誕生したと考えられている地域は？',a:['アフリカ','ヨーロッパ','南アメリカ','オーストラリア'],c:0,e:'人類はアフリカで誕生したと考えられています。'},
+{r:'ch2',l:'basic',q:'人類の祖先の特徴の一つは？',a:['直立二足歩行','えら呼吸','飛行','水中生活'],c:0,e:'直立二足歩行は人類の重要な特徴です。'},
+{r:'ch2',l:'basic',q:'旧石器時代の主な食料獲得方法は？',a:['狩猟・採集','工場生産','大規模商業','機械農業'],c:0,e:'狩猟・採集を中心に生活しました。'},
+{r:'ch2',l:'basic',q:'石を打ち欠いて作った石器は？',a:['打製石器','磨製石器','青銅器','鉄器'],c:0,e:'打ち欠いて作る石器が打製石器です。'},
+{r:'ch2',l:'basic',q:'植物を栽培して食料を生産する活動は？',a:['農耕','牧畜','狩猟','採集'],c:0,e:'農耕は植物を育てて食料を生産します。'},
+{r:'ch2',l:'basic',q:'動物を飼育して利用する活動は？',a:['牧畜','農耕','採集','狩猟'],c:0,e:'牧畜は家畜を飼育して利用します。'},
+{r:'ch2',l:'basic',q:'農耕・牧畜の開始によって増えた生活は？',a:['定住生活','移動生活だけ','海上生活','洞窟生活だけ'],c:0,e:'食料を生産・蓄えることで定住が進みました。'},
+{r:'ch2',l:'basic',q:'ナイル川流域で発達した文明は？',a:['エジプト文明','メソポタミア文明','インダス文明','中国文明'],c:0,e:'ナイル川流域でエジプト文明が発達しました。'},
+{r:'ch2',l:'basic',q:'古代エジプトの象形文字は？',a:['ヒエログリフ','くさび形文字','甲骨文字','ローマ字'],c:0,e:'ヒエログリフは古代エジプトの文字です。'},
+{r:'ch2',l:'basic',q:'メソポタミア文明の二つの大河は？',a:['チグリス川とユーフラテス川','ナイル川とインダス川','黄河と長江','アマゾン川とナイル川'],c:0,e:'メソポタミアはこの二つの大河の流域です。'},
+{r:'ch2',l:'basic',q:'メソポタミア文明の文字は？',a:['くさび形文字','ヒエログリフ','甲骨文字','万葉仮名'],c:0,e:'粘土板などにくさび形文字が刻まれました。'},
+{r:'ch2',l:'basic',q:'インダス文明の代表的な都市遺跡は？',a:['モヘンジョ・ダロ','アテネ','ローマ','長安'],c:0,e:'モヘンジョ・ダロは代表的な都市遺跡です。'},
+{r:'ch2',l:'basic',q:'中国文明が発達した代表的な大河は？',a:['黄河','ナイル川','インダス川','ユーフラテス川'],c:0,e:'中国では黄河流域を中心に文明が発達しました。'},
+{r:'ch2',l:'basic',q:'古代中国で使われた文字資料は？',a:['甲骨文字','ヒエログリフ','くさび形文字','ローマ字'],c:0,e:'甲骨文字は亀の甲や牛の骨などに刻まれました。'},
+{r:'ch2',l:'basic',q:'儒学のもととなる考えを説いた人物は？',a:['孔子','シャカ','イエス','ムハンマド'],c:0,e:'孔子は儒学のもととなる考えを説きました。'},
+{r:'ch2',l:'basic',q:'仏教を開いた人物は？',a:['シャカ','孔子','イエス','ムハンマド'],c:0,e:'シャカが仏教を開きました。'},
+{r:'ch2',l:'basic',q:'キリスト教を開いた人物は？',a:['イエス','シャカ','孔子','ムハンマド'],c:0,e:'イエスの教えをもとにキリスト教が成立しました。'},
+{r:'ch2',l:'basic',q:'イスラム教を開いた人物は？',a:['ムハンマド','シャカ','孔子','イエス'],c:0,e:'ムハンマドがイスラム教を広めました。'},
+{r:'ch2',l:'std',q:'農耕・牧畜の開始によって定住が進んだ理由は？',a:['食料を生産・蓄えられるようになったから','文字が発明されたから','狩猟が消えたから','都市が先にできたから'],c:0,e:'食料生産と蓄えが定住を支えました。'},
+{r:'ch2',l:'std',q:'食料の余剰生産が分業につながった理由は？',a:['農業以外の仕事をする人を支えられたから','食料がなくなったから','移動が増えたから','文字が消えたから'],c:0,e:'余った食料が分業を支えました。'},
+{r:'ch2',l:'std',q:'大河流域で文明が発達した理由の一つは？',a:['水を農業に利用できたから','必ず寒いから','海がないから','鉄が多いから'],c:0,e:'大河の水は農業を支えました。'},
+{r:'ch2',l:'std',q:'文字が生まれた理由の一つは？',a:['社会や経済の情報を記録する必要があったから','石器が作れなくなったから','農業が消えたから','移動が増えたから'],c:0,e:'社会が複雑になると記録の必要性が高まりました。'},
+{r:'ch2',l:'std',q:'エジプト文明とメソポタミア文明の共通点は？',a:['大河流域で発達した','同じ川だった','同じ文字だった','同じ王が治めた'],c:0,e:'どちらも大河の流域で発達しました。'},
+{r:'ch2',l:'adv',q:'「人類誕生→農耕・牧畜→定住→分業→都市」の流れが成立する理由は？',a:['食料生産と余剰が生活と社会を変えたから','文字が最初にできたから','工場ができたから','全員が同じ仕事をしたから'],c:0,e:'食料生産と余剰が定住・分業・都市の発達を支えました。'},
+{r:'ch2',l:'adv',q:'大河の氾濫がもつ二面性として適切なのは？',a:['災害になる一方、肥沃な土地をもたらすこともあった','利益だけだった','害だけだった','農業と無関係だった'],c:0,e:'氾濫は災害にもなりますが肥沃な土をもたらす場合もありました。'},
+{r:'ch2',l:'adv',q:'文明の成立を「川があったから」だけで説明するのが不十分なのはなぜ？',a:['自然環境だけでなく農業・技術・社会の変化も関係するから','川は無関係だから','文字だけが原因だから','人間は関係ないから'],c:0,e:'文明は複数の要因を関連づけて考える必要があります。'}
+];
+var range='all',level='all',list=[],pos=0,score=0;
+function $(id){return document.getElementById(id)}
+function selectRange(v){range=v;['rangeAll','rangeCh1','rangeCh2'].forEach(function(id){$(id).classList.remove('selected')});$(v==='all'?'rangeAll':v==='ch1'?'rangeCh1':'rangeCh2').classList.add('selected')}
+function selectLevel(v){level=v;['levelAll','levelBasic','levelStd','levelAdv'].forEach(function(id){$(id).classList.remove('selected')});$(v==='all'?'levelAll':v==='basic'?'levelBasic':v==='std'?'levelStd':'levelAdv').classList.add('selected')}
+$('rangeAll').onclick=function(){selectRange('all')};$('rangeCh1').onclick=function(){selectRange('ch1')};$('rangeCh2').onclick=function(){selectRange('ch2')};$('levelAll').onclick=function(){selectLevel('all')};$('levelBasic').onclick=function(){selectLevel('basic')};$('levelStd').onclick=function(){selectLevel('std')};$('levelAdv').onclick=function(){selectLevel('adv')};
+function shuffle(a){return a.slice().sort(function(){return Math.random()-.5})}
+function begin(arr){list=shuffle(arr).slice(0,20);pos=0;score=0;$('screenHome').classList.add('hide');$('screenResult').classList.add('hide');$('screenQuiz').classList.remove('hide');render()}
+$('startBtn').onclick=function(){var arr=questions.filter(function(x){return(range==='all'||x.r===range)&&(level==='all'||x.l===level)});if(!arr.length){alert('この条件の問題はありません');return}begin(arr)};
+$('reviewBtn').onclick=function(){var ids=JSON.parse(localStorage.getItem('historyWrong')||'[]');var arr=questions.filter(function(_,i){return ids.indexOf(i)>=0});if(!arr.length){alert('まだ間違い問題がありません。まず問題を解いてみよう！');return}begin(arr)};
+function render(){var x=list[pos];$('info').textContent=(x.r==='ch1'?'第1章':'第2章 第1節')+'・'+(x.l==='basic'?'基礎':x.l==='std'?'標準':'応用')+'　'+(pos+1)+' / '+list.length;$('progress').style.width=(pos/list.length*100)+'%';$('question').textContent='Q'+(pos+1)+'　'+x.q;$('answers').innerHTML='';$('feedback').innerHTML='';$('feedback').className='';$('nextBtn').classList.add('hide');x.a.forEach(function(v,n){var b=document.createElement('button');b.textContent=(n+1)+'　'+v;b.onclick=function(){answer(n,b)};$('answers').appendChild(b)})}
+function answer(n,clicked){var x=list[pos];var bs=$('answers').children;for(var j=0;j<bs.length;j++)bs[j].disabled=true;bs[x.c].classList.add('good');if(n===x.c){score++;clicked.classList.add('good');$('feedback').className='feedback good';$('feedback').innerHTML='⭕ 正解！<br>'+x.e}else{clicked.classList.add('bad');$('feedback').className='feedback bad';$('feedback').innerHTML='❌ 不正解。正解は「'+x.a[x.c]+'」<br>'+x.e;var id=questions.indexOf(x),ids=JSON.parse(localStorage.getItem('historyWrong')||'[]');if(ids.indexOf(id)<0)ids.push(id);localStorage.setItem('historyWrong',JSON.stringify(ids))}$('nextBtn').classList.remove('hide')}
+$('nextBtn').onclick=function(){pos++;if(pos<list.length)render();else finish()};
+function finish(){$('screenQuiz').classList.add('hide');$('screenResult').classList.remove('hide');var p=Math.round(score/list.length*100);$('score').textContent=score+' / '+list.length+'問（'+p+'%）';$('message').textContent=p>=90?'すばらしい！':p>=70?'いい感じ！間違い復習でもう一段上を目指そう。':'教科書を確認して、もう一度挑戦しよう。'}
+$('againBtn').onclick=function(){var arr=questions.filter(function(x){return(range==='all'||x.r===range)&&(level==='all'||x.l===level)});begin(arr)};$('resultHomeBtn').onclick=function(){$('screenResult').classList.add('hide');$('screenHome').classList.remove('hide')};
+})();</script></body></html>
