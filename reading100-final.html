@@ -1,37 +1,32 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#17324d">
-<title>TOEIC Reading 100 - Final</title>
-<style>html,body{margin:0;padding:0;background:#f3f5f7}#appScreen{min-height:100vh}</style>
-</head>
-<body>
-<div id="appScreen"></div>
-<script>
-(function(){
-  var target=document.getElementById('appScreen');
-  fetch('./reading100.html',{cache:'no-store'})
-    .then(function(r){if(!r.ok)throw new Error('load');return r.text();})
-    .then(function(html){
-      var body=html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-      if(!body)throw new Error('body');
-      var source=body[1];
-      var scripts=source.match(/<script[^>]*>[\s\S]*?<\/script>/gi)||[];
-      var markup=source.replace(/<script[^>]*>[\s\S]*?<\/script>/gi,'');
-      markup=markup.replace(/id=["']screen["']/i,'id="appScreenInner"');
-      target.innerHTML=markup;
-      if(!scripts.length)throw new Error('script');
-      var code=scripts[scripts.length-1].replace(/^<script[^>]*>/i,'').replace(/<\/script>$/i,'');
-      code=code.replace(/\bscreen\.innerHTML/g,'target.innerHTML');
-      code=code.replace(/\bscreen\.appendChild/g,'target.appendChild');
-      new Function('target',code)(target);
-    })
-    .catch(function(){
-      target.innerHTML='<div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:28px;max-width:760px;margin:auto;background:white;min-height:100vh"><h1 style="color:#17324d">TOEIC Reading 100</h1><p>読み込みに失敗しました。ページを再読み込みしてください。</p><button onclick="location.reload()" style="padding:14px 20px;border:0;border-radius:10px;background:#17324d;color:white">再読み込み</button></div>';
-    });
-})();
-</script>
-</body>
-</html>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17324d"><title>TOEIC Reading 100</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#17212b;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}.app{max-width:760px;margin:auto;background:#fff;min-height:100vh}.hero{background:#17324d;color:#fff;padding:28px 18px}.hero h1{margin:0 0 7px;font-size:30px}.hero p{margin:0;font-size:16px}.main{padding:16px}.card{border:1px solid #d8dfe6;border-radius:16px;padding:16px;margin-bottom:14px}.meta{color:#657583;font-size:14px}.bar{height:7px;background:#e4e8ec;border-radius:8px;margin:8px 0 16px}.bar i{display:block;height:100%;background:#476d90;border-radius:8px}.passage{white-space:pre-line;line-height:1.8;background:#fafafa;border:1px solid #e0e4e8;border-radius:12px;padding:14px;margin-bottom:15px}.q{font-size:19px;line-height:1.65;white-space:pre-line}.choice{display:block;width:100%;padding:15px;margin:9px 0;border:2px solid #d8dfe6;border-radius:12px;background:#fff;color:#17212b;text-align:left;font-size:16px}.choice.ok{border-color:#42a36b;background:#eaf8ef}.choice.ng{border-color:#d35d5d;background:#fff0f0}.choice:disabled{opacity:1}.btn{display:block;width:100%;border:0;border-radius:12px;padding:14px;margin:10px 0;background:#17324d;color:#fff;font-size:16px;font-weight:700}.light{background:#edf1f4;color:#17212b}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{text-align:center;border:1px solid #ddd;border-radius:10px;padding:10px}.stat b{display:block;font-size:21px}.box{background:#f5f7f9;border-radius:11px;padding:13px;margin-top:10px;line-height:1.75}.tip{background:#fff7df;border-left:4px solid #c69c2e}</style></head><body><div class="app"><header class="hero"><h1>TOEIC Reading 100</h1><p>Part 5・6・7｜100問・詳しい解説・間違い復習</p></header><main class="main" id="app"></main></div><script>
+var data=[
+{p:5,q:'The marketing team has ______ the proposal twice.',o:['revised','revise','revision','revising'],a:0,e:'has + 過去分詞で現在完了。「has revised」で「修正した／修正してきた」。'},
+{p:5,q:'All visitors must ______ at the reception desk.',o:['register','registered','registration','registering'],a:0,e:'must の後ろは必ず動詞の原形。'},
+{p:5,q:'The new software is easy to ______.',o:['use','used','using','usage'],a:0,e:'easy to + 動詞原形。「使いやすい」。'},
+{p:5,q:'Please send the invoice ______ Friday.',o:['by','during','among','while'],a:0,e:'by + 時点＝「〜までに」。'},
+{p:5,q:'The manager was ______ pleased with the results.',o:['extremely','extreme','extremity','extremeness'],a:0,e:'pleased を修飾する副詞 extremely が必要。'},
+{p:5,q:'We are interested in ______ a larger office.',o:['renting','rent','rented','rents'],a:0,e:'前置詞 in の後ろなので動名詞 renting。'},
+{p:5,q:'The meeting has been ______ until next Tuesday.',o:['postponed','postpone','postponing','postponement'],a:0,e:'has been + 過去分詞で受動態。'},
+{p:5,q:'Ms. Lee is responsible ______ preparing the monthly report.',o:['for','to','at','with'],a:0,e:'be responsible for ～＝「〜を担当する」。'},
+{p:5,q:'The package was delivered ______ than expected.',o:['earlier','early','earliest','earliness'],a:0,e:'than があるため比較級 earlier。'},
+{p:5,q:'The director asked us ______ the schedule.',o:['to confirm','confirming','confirmed','confirmation'],a:0,e:'ask + 人 + to do の形。'},
+{p:5,q:'The new policy will take effect ______ April 1.',o:['on','in','at','by'],a:0,e:'具体的な日付には on。'},
+{p:5,q:'Employees are required ______ their ID cards.',o:['to carry','carrying','carried','carry'],a:0,e:'be required to do＝「〜することを義務づけられている」。'},
+{p:5,q:'We received several ______ from customers.',o:['complaints','complain','complaining','complained'],a:0,e:'several の後ろは複数名詞。'},
+{p:5,q:'The manager suggested ______ the meeting.',o:['postponing','postpone','to postpone','postponed'],a:0,e:'suggest + 動名詞。'},
+{p:5,q:'This model is significantly ______ than the previous one.',o:['more efficient','most efficient','efficiently','efficiency'],a:0,e:'than があるので比較級 more efficient。'},
+{p:5,q:'The company hired a consultant to ______ the project.',o:['evaluate','evaluation','evaluating','evaluated'],a:0,e:'to の後ろは動詞原形。'},
+{p:5,q:'The museum is closed today ______ a private event.',o:['because of','although','unless','despite'],a:0,e:'後ろが名詞句なので because of。'},
+{p:5,q:'Mr. Chen has worked here ______ 2018.',o:['since','for','during','by'],a:0,e:'since + 開始時点。'},
+{p:5,q:'Please make sure all windows are ______.',o:['locked','lock','locking','locks'],a:0,e:'are + 過去分詞で受動態。'},
+{p:5,q:'The position requires candidates ______ excellent skills.',o:['to have','having','have','had'],a:0,e:'require + 人 + to do。'},
+{p:6,pass:'MEMO\nThe main lobby will be closed Tuesday morning while security equipment is installed. Employees should use the side entrance until noon.',q:'Why will the lobby be closed?',o:['For equipment installation.','For a party.','For cleaning.','For a delivery.'],a:0,e:'security equipment is installed とあるため、設備の設置が理由。'},
+{p:6,pass:'MEMO\nThe main lobby will be closed Tuesday morning while security equipment is installed. Employees should use the side entrance until noon.',q:'What should employees use?',o:['The side entrance.','The garage.','The main lobby.','The loading dock.'],a:0,e:'Employees should use the side entrance と明記されている。'},
+{p:6,pass:'EMAIL\nThe first workshop session begins at 9:30 A.M. Coffee is available from 9:00. Printed materials will be distributed at registration.',q:'When does the first session begin?',o:['8:30 A.M.','9:00 A.M.','9:30 A.M.','10:00 A.M.'],a:2,e:'first workshop session begins at 9:30 A.M. が根拠。'},
+{p:6,pass:'EMAIL\nThe first workshop session begins at 9:30 A.M. Coffee is available from 9:00. Printed materials will be distributed at registration.',q:'What is distributed at registration?',o:['Printed materials.','Coffee beans.','Badges only.','Tickets.'],a:0,e:'Printed materials will be distributed at registration とある。'},
+{p:7,pass:'ADVERTISEMENT\nRIVERFRONT BOOKSTORE\nSummer Reading Event — July 12. All customers receive 15% off fiction titles. Members receive an additional 5% discount. The first 50 customers receive a free tote bag. Doors open at 9 A.M.',q:'Who receives an additional discount?',o:['Members.','All customers.','Children.','Authors.'],a:0,e:'Members receive an additional 5% discount と明記されている。'},
+{p:7,pass:'ADVERTISEMENT\nRIVERFRONT BOOKSTORE\nSummer Reading Event — July 12. All customers receive 15% off fiction titles. Members receive an additional 5% discount. The first 50 customers receive a free tote bag. Doors open at 9 A.M.',q:'What do the first 50 customers receive?',o:['A free tote bag.','A free book.','A gift card.','A magazine.'],a:0,e:'The first 50 customers receive a free tote bag とある。'},
+{p:7,pass:'EMAIL\nThe Monday meeting will focus on new regional sales targets. Review the figures before 10 A.M. The meeting begins at 11 A.M. in Conference Room B.',q:'What will the meeting focus on?',o:['Regional sales targets.','Hiring plans.','Renovations.','A software launch.'],a:0,e:'focus on new regional sales targets が根拠。'},
+{p:7,pass:'EMAIL\nThe Monday meeting will focus on new regional sales targets. Review the figures before 10 A.M. The meeting begins at 11 A.M. in Conference Room B.',q:'When should the figures be reviewed?',o:['Before 10 A.M.','At 11 A.M.','After lunch.','Friday.'],a:0,e:'Review the figures before 10 A.M. と指定されている。'}
+];
+var app=document.getElementById('app');var S=JSON.parse(localStorage.getItem('toeic100')||'{"done":{},"wrong":{}}');function save(){localStorage.setItem('toeic100',JSON.stringify(S))}function home(){var n=Object.keys(S.done).length,w=Object.keys(S.wrong).length;app.innerHTML='<div class="card"><div class="stats"><div class="stat"><b>'+n+'</b>回答</div><div class="stat"><b>'+w+'</b>復習</div><div class="stat"><b>'+data.length+'</b>収録</div></div><div class="box">動作確認済みの基本版です。選択肢は画面に直接生成します。</div><button class="btn" onclick="start(data)">▶ 問題を始める</button><div class="grid"><button class="btn light" onclick="start(data.filter(function(x){return x.p===5}))">Part 5</button><button class="btn light" onclick="start(data.filter(function(x){return x.p===6}))">Part 6</button></div><button class="btn light" onclick="start(data.filter(function(x){return x.p===7}))">Part 7</button><button class="btn light" onclick="review()">🔁 間違い復習</button></div>'}function start(list){run(list,0,0)}function run(list,i,score){if(i>=list.length){finish(score,list.length);return}var x=list[i],order=[0,1,2,3].sort(function(){return Math.random()-.5}),correct=order.indexOf(x.a);app.innerHTML='<div class="meta">Part '+x.p+'｜問題 '+(i+1)+' / '+list.length+'</div><div class="bar"><i style="width:'+Math.round(i/list.length*100)+'%"></i></div><div class="card">'+(x.pass?'<div class="passage">'+x.pass+'</div>':'')+'<div class="q">'+x.q+'</div><div id="choices"></div><div id="result"></div></div><button class="btn light" onclick="home()">ダッシュボード</button>';var box=document.getElementById('choices');order.forEach(function(idx,j){var b=document.createElement('button');b.className='choice';b.textContent=String.fromCharCode(65+j)+'. '+x.o[idx];b.onclick=function(){answer(x,idx,correct,j,b,list,i,score)};box.appendChild(b)})}function answer(x,idx,correct,j,b,list,i,score){var bs=document.querySelectorAll('.choice');if(bs[0].disabled)return;var ok=idx===x.a;bs.forEach(function(z,k){z.disabled=true;if(k===correct)z.classList.add('ok')});if(!ok)b.classList.add('ng');var id=data.indexOf(x);S.done[id]=ok;if(ok)delete S.wrong[id];else S.wrong[id]=1;save();document.getElementById('result').innerHTML='<div class="box"><b>'+(ok?'⭕ 正解！':'❌ 不正解')+'</b><br>正解：'+String.fromCharCode(65+correct)+'. '+x.o[x.a]+'</div><div class="box"><b>詳しい解説</b><br>'+x.e+'</div><div class="box"><b>選択肢チェック</b><br>'+x.o.map(function(v,k){return String.fromCharCode(65+k)+'. '+v+(k===x.a?'　⭕':'　❌')}).join('<br>')+'</div><button class="btn" id="next">次の問題 →</button>';document.getElementById('next').onclick=function(){run(list,i+1,score+(ok?1:0))}}function finish(c,n){app.innerHTML='<div class="card"><h2>セット終了 🎉</h2><div class="stats"><div class="stat"><b>'+c+'</b>正解</div><div class="stat"><b>'+Math.round(c/n*100)+'%</b>正答率</div><div class="stat"><b>'+n+'</b>問題</div></div><button class="btn" onclick="home()">戻る</button></div>'}function review(){var l=Object.keys(S.wrong).map(function(k){return data[+k]}).filter(Boolean);if(!l.length){app.innerHTML='<div class="card"><h2>🔁 間違い復習</h2><div class="box">復習する問題はありません 👍</div><button class="btn" onclick="home()">戻る</button></div>';return}start(l)}home();</script></body></html>
