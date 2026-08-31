@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TOEIC Reading v17</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#17212b;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}.wrap{max-width:760px;margin:auto;background:#fff;min-height:100vh}.hero{background:#17324d;color:#fff;padding:28px 20px}.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:0;font-size:16px}.main{padding:20px}.meta{color:#667584;font-size:14px;margin-bottom:8px}.card{border:1px solid #d9dfe5;border-radius:18px;padding:18px}.question{font-size:20px;line-height:1.65;margin:18px 0}.choice{display:block;width:100%;padding:16px;margin:10px 0;border:2px solid #d8dfe6;border-radius:12px;background:#fff;color:#17212b;text-align:left;font-size:17px}.choice:active{transform:scale(.99)}.choice.ok{border-color:#43a46c;background:#eaf8ef}.choice.ng{border-color:#d85f5f;background:#fff0f0}.result{margin-top:16px}.box{padding:14px;margin-top:10px;border-radius:11px;background:#f5f7f9;line-height:1.75}.tip{background:#fff7df}.next{display:block;width:100%;border:0;border-radius:12px;padding:15px;margin-top:14px;background:#17324d;color:white;font-size:17px;font-weight:700}.hidden{display:none}.passage{white-space:pre-line;line-height:1.8;background:#fafafa;border:1px solid #e0e4e8;border-radius:12px;padding:14px}.homebtn{display:block;width:100%;border:0;border-radius:12px;padding:14px;margin-top:14px;background:#edf1f4;color:#17212b;font-size:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero"><h1>TOEIC Reading v17</h1><p>Part 5・6・7｜まず表示を安定させる版</p></header>
+<main class="main">
+<div class="meta">Part 5｜短文穴埋め｜問題 1</div>
+<div class="card">
+<div class="question">The marketing team has ______ the proposal twice.</div>
+<div id="choices">
+<button class="choice" onclick="answer(0,this)">A. revised</button>
+<button class="choice" onclick="answer(1,this)">B. revise</button>
+<button class="choice" onclick="answer(2,this)">C. revision</button>
+<button class="choice" onclick="answer(3,this)">D. revising</button>
+</div>
+<div id="result" class="result hidden">
+<div class="box"><strong id="judge"></strong><br>正解：A. revised</div>
+<div class="box"><strong>詳しい解説</strong><br>has + 過去分詞で現在完了を作ります。したがって revised が正解です。twice（2度）も、これまでに2度修正したという現在完了と相性がよい表現です。</div>
+<div class="box"><strong>選択肢チェック</strong><br>A. revised → ⭕ has revised（現在完了）<br>B. revise → ❌ has の後ろでは原形だけにはできません<br>C. revision → ❌ 名詞なので文の形に合いません<br>D. revising → ❌ has revising とはしません</div>
+<div class="box"><strong>日本語訳</strong><br>マーケティングチームは提案書を2度修正しました。</div>
+<div class="box tip"><strong>攻略ポイント</strong><br>「has / have / had + 空欄」なら、まず過去分詞を疑う。Part 5では非常に重要です。</div>
+<button class="next" onclick="nextQuestion()">次の問題へ →</button>
+</div>
+</div>
+<button class="homebtn" onclick="location.reload()">最初から</button>
+</main>
+</div>
+<script>
+function answer(n,el){
+ var buttons=document.querySelectorAll('.choice');
+ if(buttons[0].disabled)return;
+ for(var i=0;i<buttons.length;i++){buttons[i].disabled=true;if(i===0)buttons[i].classList.add('ok');}
+ if(n!==0)el.classList.add('ng');
+ document.getElementById('judge').textContent=n===0?'⭕ 正解！':'❌ 不正解';
+ document.getElementById('result').classList.remove('hidden');
+}
+function nextQuestion(){alert('表示確認OK！ 次の段階でPart 5・6・7の本番形式100問をこの安定した表示方式に載せます。');}
+</script>
+</body>
+</html>
