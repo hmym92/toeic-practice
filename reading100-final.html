@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17324d">
+<title>TOEIC Reading 100 - Final</title>
+<style>html,body{margin:0;padding:0;background:#f3f5f7}#appScreen{min-height:100vh}</style>
+</head>
+<body>
+<div id="appScreen"></div>
+<script>
+(function(){
+  var target=document.getElementById('appScreen');
+  fetch('./reading100.html',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('load');return r.text();})
+    .then(function(html){
+      var body=html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+      if(!body)throw new Error('body');
+      var source=body[1];
+      var scripts=source.match(/<script[^>]*>[\s\S]*?<\/script>/gi)||[];
+      var markup=source.replace(/<script[^>]*>[\s\S]*?<\/script>/gi,'');
+      markup=markup.replace(/id=["']screen["']/i,'id="appScreenInner"');
+      target.innerHTML=markup;
+      if(!scripts.length)throw new Error('script');
+      var code=scripts[scripts.length-1].replace(/^<script[^>]*>/i,'').replace(/<\/script>$/i,'');
+      code=code.replace(/\bscreen\.innerHTML/g,'target.innerHTML');
+      code=code.replace(/\bscreen\.appendChild/g,'target.appendChild');
+      new Function('target',code)(target);
+    })
+    .catch(function(){
+      target.innerHTML='<div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:28px;max-width:760px;margin:auto;background:white;min-height:100vh"><h1 style="color:#17324d">TOEIC Reading 100</h1><p>読み込みに失敗しました。ページを再読み込みしてください。</p><button onclick="location.reload()" style="padding:14px 20px;border:0;border-radius:10px;background:#17324d;color:white">再読み込み</button></div>';
+    });
+})();
+</script>
+</body>
+</html>
